@@ -16,6 +16,7 @@ public class UIGame : MonoBehaviour
 
 	private static UIGame s_inst;
 
+	private UILabel instLbl;
 	private UIButton spinBtn;
 	private UITexture sampleIMage;
 	private TweenScale parentImage;
@@ -103,6 +104,9 @@ public class UIGame : MonoBehaviour
 		sampleIMage = transform.FindChild("Center").FindChild("imageparent").FindChild("texture_image").GetComponent<UITexture>();
 		popupList = transform.FindChild("Bottom").FindChild("listBtn").GetComponent<UIPopupList>();
 		parentImage = transform.FindChild("Center").FindChild("imageparent").GetComponent<TweenScale>();
+		instLbl = transform.FindChild("Bottom").FindChild("instLbl").GetComponent<UILabel>();
+
+		spinBtn.gameObject.SetActive(false);
 	}
 
 	void Start() {
@@ -140,9 +144,19 @@ public class UIGame : MonoBehaviour
 			case "spinBtn":
 				Spin();
 				break;
+			case "listBtn":
+				OnListChanged();
+				break;
 			default:
 				break;
 		}
+	}
+
+
+	void OnListChanged() { 
+	
+		instLbl.gameObject.SetActive(false);
+		spinBtn.gameObject.SetActive(true);
 	}
 
 	void Spin() {
