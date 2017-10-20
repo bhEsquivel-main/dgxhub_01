@@ -103,7 +103,7 @@ public class UIResult : MonoBehaviour
 		}
 
 
-		yield return new WaitForSeconds(1.5f);
+		yield return new WaitForSeconds(0.8f);
 		repeatBtn.gameObject.SetActive(true);
 	}
 
@@ -124,7 +124,7 @@ public class UIResult : MonoBehaviour
 	}
 
 	IEnumerator Repeat() {
-		yield return new WaitForSeconds(1);
+		yield return new WaitForSeconds(0.3f);
 		UIGame.SetActive(true);
 		UIResult.SetActive(false);
 	}

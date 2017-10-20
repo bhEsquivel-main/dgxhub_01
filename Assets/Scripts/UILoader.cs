@@ -88,8 +88,8 @@ public class UILoader : MonoBehaviour {
 	}
 	void Awake(){
 		//Reference
-		progressFore = transform.FindChild("Bottom").FindChild("progress_fg").GetComponent<UITexture>();
-		progressCount = transform.FindChild("Bottom").FindChild("progressCountLbl").GetComponent<UILabel>();
+		progressFore = transform.FindChild("Center").FindChild("progress_fg").GetComponent<UITexture>();
+		progressCount = transform.FindChild("Center").FindChild("progressCountLbl").GetComponent<UILabel>();
 
 		_loadedSymDict = new Dictionary<EUtil.Symbol, bool>();
 

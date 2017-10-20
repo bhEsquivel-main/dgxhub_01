@@ -18,6 +18,7 @@ public class UIGame : MonoBehaviour
 
 	private UIButton spinBtn;
 	private UITexture sampleIMage;
+	private TweenScale parentImage;
 	private UIPopupList popupList;
 
 
@@ -99,9 +100,9 @@ public class UIGame : MonoBehaviour
 
 	void Awake() {
 		spinBtn = transform.FindChild("Bottom").FindChild("spinBtn").GetComponent<UIButton>();
-		sampleIMage = transform.FindChild("Center").FindChild("texture_image").GetComponent<UITexture>();
+		sampleIMage = transform.FindChild("Center").FindChild("imageparent").FindChild("texture_image").GetComponent<UITexture>();
 		popupList = transform.FindChild("Bottom").FindChild("listBtn").GetComponent<UIPopupList>();
-
+		parentImage = transform.FindChild("Center").FindChild("imageparent").GetComponent<TweenScale>();
 	}
 
 	void Start() {
@@ -149,6 +150,7 @@ public class UIGame : MonoBehaviour
 		cTime = 0;
 		hasPressedSpin = true;
 		ShuffleTextureList(randNUmList);
+		parentImage.enabled = true;
 
 	}
 
@@ -161,6 +163,9 @@ public class UIGame : MonoBehaviour
 				cTime += Time.deltaTime;
 			}
 			else {
+
+				parentImage.enabled = false;
+				parentImage.transform.localScale = Vector3.one;
 				sampleIMage.mainTexture = textureList[randNUmList[currentIndex]];
 				StartCoroutine( CheckSelectedSpin());
 				hasPressedSpin = false;
