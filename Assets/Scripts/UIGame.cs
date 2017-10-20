@@ -162,7 +162,7 @@ public class UIGame : MonoBehaviour
 			}
 			else {
 				sampleIMage.mainTexture = textureList[randNUmList[currentIndex]];
-                CheckSelectedSpin();
+				StartCoroutine( CheckSelectedSpin());
 				hasPressedSpin = false;
 				spinBtn.isEnabled = true;
 			}
@@ -196,14 +196,19 @@ public class UIGame : MonoBehaviour
 	}
 
 
-	void CheckSelectedSpin() {
+	IEnumerator CheckSelectedSpin() {
+		bool tResult = false;
 		if (((EUtil.Symbol)randNUmList[currentIndex]).ToString() == popupList.value)
 		{
-			Debug.Log("SUCCESS");
+			tResult = true;//			Debug.Log("SUCCESS");
 		}
 		else {
-			Debug.Log("FAILED");
+			tResult = false; //Debug.Log("FAILED");
 		}
+
+		yield return new WaitForSeconds(0.7f);
+		UIResult.SetActive(true, tResult);
+		UIGame.SetActive(false);
 	}
 
 
