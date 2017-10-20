@@ -98,12 +98,12 @@ public class UIResult : MonoBehaviour
 		{
 
 			Managers.Instance.SoundMgr.PlayClip(EUtil.SoundFX.WIN);
-			resultLbl.text = "YOU WIN!";
+			resultLbl.text = "SUCCESS!";
 		}
 		else {
 
 			Managers.Instance.SoundMgr.PlayClip(EUtil.SoundFX.LOSE);
-			resultLbl.text = "TRY AGAIN!";
+			resultLbl.text = "FAILED!";
 		}
 
 

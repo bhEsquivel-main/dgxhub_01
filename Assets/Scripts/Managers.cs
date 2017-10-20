@@ -35,6 +35,7 @@ public class Managers : MonoBehaviour
 
         Reference();
 		SymbolLoader.instance.Initialise();
+		CFunc.LoadScore();
 	}
 
 

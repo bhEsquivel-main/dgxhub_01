@@ -21,6 +21,8 @@ public class UIGame : MonoBehaviour
 	private UITexture sampleIMage;
 	private TweenScale parentImage;
 	private UIPopupList popupList;
+	private UILabel sLabel;
+	private UILabel fLabel;
 
 
 	private Dictionary<int, Texture2D> textureList = new Dictionary<int,Texture2D>();
@@ -105,13 +107,27 @@ public class UIGame : MonoBehaviour
 		popupList = transform.FindChild("Bottom").FindChild("listBtn").GetComponent<UIPopupList>();
 		parentImage = transform.FindChild("Center").FindChild("imageparent").GetComponent<TweenScale>();
 		instLbl = transform.FindChild("Bottom").FindChild("instLbl").GetComponent<UILabel>();
-
+		sLabel = transform.FindChild("Top").FindChild("sLabel").GetComponent<UILabel>();
+		fLabel = transform.FindChild("Top").FindChild("fLabel").GetComponent<UILabel>();
 		spinBtn.gameObject.SetActive(false);
+
+		InitString();
+	}
+
+	void InitString() { 
+	
+		sLabel.text =" Success: "+ CFunc.successCount.ToString();
+		fLabel.text = "Fails: "+ CFunc.failedCount.ToString();
 	}
 
 	void Start() {
 
 		LoadSymbolList();
+		if (CFunc.lastSymbol != EUtil.Symbol.none) {
+			popupList.value = CFunc.lastSymbol.ToString();
+			instLbl.gameObject.SetActive(false);
+			spinBtn.gameObject.SetActive(true);
+		}
 	}
 
 
@@ -185,7 +201,8 @@ public class UIGame : MonoBehaviour
 				sampleIMage.mainTexture = textureList[randNUmList[currentIndex]];
 				StartCoroutine( CheckSelectedSpin());
 				hasPressedSpin = false;
-				spinBtn.isEnabled = true;
+				//spinBtn.isEnabled = true;
+				CFunc.lastSymbol = (EUtil.Symbol)symList.Find(x => x.pName == popupList.value).pID;
 			}
 
 			if (hasPressedSpin)
@@ -219,14 +236,19 @@ public class UIGame : MonoBehaviour
 
 	IEnumerator CheckSelectedSpin() {
 		bool tResult = false;
+
 		if (((EUtil.Symbol)randNUmList[currentIndex]).ToString() == popupList.value)
 		{
 			tResult = true;//			Debug.Log("SUCCESS");
+			CFunc.successCount++;
 		}
 		else {
 			tResult = false; //Debug.Log("FAILED");
+			CFunc.failedCount++;
 		}
 
+
+		CFunc.SaveScore();
 		yield return new WaitForSeconds(0.7f);
 		UIResult.SetActive(true, tResult);
 		UIGame.SetActive(false);

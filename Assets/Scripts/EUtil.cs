@@ -12,7 +12,8 @@ namespace EUtil{
 	}
 
 	public enum Symbol
-	{ 
+	{
+		none = -1,
 		banana = 0,
 		cherry,
 		diamond,
