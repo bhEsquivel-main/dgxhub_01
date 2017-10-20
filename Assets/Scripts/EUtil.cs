@@ -25,5 +25,12 @@ namespace EUtil{
 
 	}
 
+	public enum SoundFX {
+
+		SPIN = 0,
+		WIN,
+		LOSE,
+	}
+
 
 }

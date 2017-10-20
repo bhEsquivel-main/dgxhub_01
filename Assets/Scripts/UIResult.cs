@@ -96,9 +96,13 @@ public class UIResult : MonoBehaviour
 		resultLbl.gameObject.SetActive(true);
 		if (isSuccess)
 		{
+
+			Managers.Instance.SoundMgr.PlayClip(EUtil.SoundFX.WIN);
 			resultLbl.text = "YOU WIN!";
 		}
 		else {
+
+			Managers.Instance.SoundMgr.PlayClip(EUtil.SoundFX.LOSE);
 			resultLbl.text = "TRY AGAIN!";
 		}
 

@@ -160,6 +160,8 @@ public class UIGame : MonoBehaviour
 	}
 
 	void Spin() {
+		Managers.Instance.SoundMgr.PlayClip(EUtil.SoundFX.SPIN);
+
 		spinBtn.isEnabled = false;
 		cTime = 0;
 		hasPressedSpin = true;
